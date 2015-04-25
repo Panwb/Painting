@@ -1,7 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
-using BundleTransformer.Core.Bundles;
-using BundleTransformer.Core.Transformers;
+﻿using System.Web.Optimization;
 
 namespace Painting.Web
 {
@@ -10,8 +7,6 @@ namespace Painting.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            var cssTransformer = new CssTransformer();
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Assets/Scripts/jquery-{version}.js"));
 
@@ -27,14 +22,12 @@ namespace Painting.Web
                       "~/Assets/Scripts/bootstrap.js",
                       "~/Assets/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Assets/Styles/css").Include(
-                      "~/Assets/Styles/bootstrap/bootstrap.css",
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
+                      "~/Assets/Styles/bootstrap/css/bootstrap.css",
                       "~/Assets/Styles/site.css"));
 
-            var fontAwesome = new StyleBundle("~/bundles/font-awesome").Include(
-                "~/Assets/Styles/font-awesome/variables.less");
-            fontAwesome.Transforms.Add(cssTransformer);
-            bundles.Add(fontAwesome);
+            bundles.Add(new StyleBundle("~/bundles/font-awesome").Include(
+                "~/Assets/Styles/font-awesome/css/font-awesome.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
