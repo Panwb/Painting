@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using System.Web.Mvc;
-using Painting.Data;
+using Painting.Framework;
 
 namespace Painting.Web
 {
@@ -21,7 +21,7 @@ namespace Painting.Web
             builder.RegisterSource(new ViewRegistrationSource());
 
             // Register our Data dependencies
-            builder.RegisterModule(new DataModule("PaintingDB"));
+            builder.RegisterModule(new AutofacRegister());
             
             var container = builder.Build();
 

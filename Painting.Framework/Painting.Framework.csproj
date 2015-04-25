@@ -104,12 +104,11 @@
   <ItemGroup>
     <Compile Include="BuildManager\BuildManagerWrapper.cs" />
     <Compile Include="BuildManager\IBuildManager.cs" />
-    <Compile Include="Data\DataModule.cs" />
-    <Compile Include="Data\EFContext.cs" />
+    <Compile Include="AutofacRegister.cs" />
     <Compile Include="Data\IDbContext.cs" />
     <Compile Include="Data\ISqlRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
-    <Compile Include="Data\Model\IModel.cs" />
+    <Compile Include="Data\Model\BaseModel.cs" />
     <Compile Include="Data\SqlRepository.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="ExceptionMessages.Designer.cs">

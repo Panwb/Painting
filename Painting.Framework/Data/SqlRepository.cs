@@ -50,7 +50,7 @@ namespace Painting.Data
         }
 
 
-        public TEntity GetById<TEntity>(int id) where TEntity : IModel<int>
+        public TEntity GetById<TEntity>(int id) where TEntity : BaseModel<int>
         {
             return (from item in GetAll<TEntity>()
                     where item.Id == id

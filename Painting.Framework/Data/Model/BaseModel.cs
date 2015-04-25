@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.ModelBinding;
 
 namespace Painting.Model
 {
+    public interface IModel<T> { }
+
     public abstract class BaseModel<T> : IModel<T>
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]

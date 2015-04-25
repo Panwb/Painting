@@ -1,32 +1,35 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Autofac;
-using Microsoft.Practices.Unity;
 using Painting.Data;
-using Painting.Framework;
 
-namespace Painting.Data
+namespace Painting.Framework
 {
-    public class DataModule : Module
+    public class AutofacRegister : Module
     {
-        private string connStr;
-
-        public DataModule(string connString)
-        {
-            this.connStr = connString;
-        }
-
         protected override void Load(ContainerBuilder builder)
         {
             var buildManager = new BuildManagerWrapper();
-            builder.Register(c => new EFContext(this.connStr, buildManager)).As<IDbContext>().InstancePerRequest();
+
+            //Repository
+            RegisterDBContext(buildManager, builder);
             builder.RegisterType<SqlRepository>().As<IRepository>().InstancePerRequest();
-
             RegisterRepositories(buildManager, builder);
-
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
 
+            //IBuildManager
+            builder.RegisterType<BuildManagerWrapper>().As<IBuildManager>().InstancePerRequest();
+
             base.Load(builder);
+        }
+
+        private void RegisterDBContext(IBuildManager buildManager, ContainerBuilder builder)
+        {
+            var dbContext = typeof(IDbContext);
+            var dbContextType = buildManager.ConcreteTypes.FirstOrDefault(dbContext.IsAssignableFrom);
+            if (dbContextType != null)
+            {
+                builder.RegisterType(dbContextType).As<IDbContext>().InstancePerRequest();
+            }
         }
 
         private void RegisterRepositories(IBuildManager buildManager, ContainerBuilder builder)
