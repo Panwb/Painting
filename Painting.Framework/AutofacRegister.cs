@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Autofac;
 using Painting.Data;
+using Painting.Framework.Logging;
 
 namespace Painting.Framework
 {
@@ -18,6 +19,8 @@ namespace Painting.Framework
 
             //IBuildManager
             builder.RegisterType<BuildManagerWrapper>().As<IBuildManager>().InstancePerRequest();
+
+            builder.RegisterType<DefaultLogger>().As<ILogger>().InstancePerRequest();
 
             base.Load(builder);
         }

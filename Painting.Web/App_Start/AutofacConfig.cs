@@ -20,7 +20,7 @@ namespace Painting.Web
             // Register dependencies in custom views
             builder.RegisterSource(new ViewRegistrationSource());
 
-            // Register our Data dependencies
+            // Register our Module dependencies
             builder.RegisterModule(new AutofacRegister());
             
             var container = builder.Build();

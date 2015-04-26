@@ -1,4 +1,5 @@
 ﻿using Painting.Data;
+using Painting.Framework.Logging;
 using Painting.Model;
 using Painting.Web.Filters;
 using System.Linq;
@@ -9,15 +10,18 @@ namespace Painting.Web.Controllers
     public class TeamController : Controller
     {
         private IRepository repo;
-        public TeamController(IRepository repo)
+        private ILogger _logger;
+        public TeamController(IRepository repo, ILogger logger)
         {
             this.repo = repo;
+            _logger = logger;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
             var teams = repo.GetAll<Team>().ToList();
+            _logger.Info("GOOD");
             return View(teams);
         }
 
